@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+// Importing newly created components
+import SecondComponent from "./SecondComponent";
+import FirstComponent from "./FirstComponent";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // BrowserRouter to wrap all
+    // the other components
+    <BrowserRouter>
+      {/*switch used to render only the first
+    route that matches the location rather
+    than rendering all matching routes. */}
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <ul>
+              <br />
+              <li>
+                {/* Link component uses the to prop
+            to describe the location where the
+            links should navigate to. */}
+                <Link to="geeks/first" target="_blank">
+                  Open First Component
+                </Link>
+              </li>
+              <br />
+              <li>
+                <Link to="geeks/second" target="_blank">
+                  Open Second Component
+                </Link>
+              </li>
+            </ul>
+          }
+        ></Route>
+        <Route exact path="/geeks/second" element={<SecondComponent />}></Route>
+        <Route exact path="/geeks/first" element={<FirstComponent />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
-
 export default App;
